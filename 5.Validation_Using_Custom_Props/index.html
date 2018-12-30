@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>React Fundaments !!</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        //------- Important Concept-------//
+        //To use validation functionality provided by React, we need to use development version of react
+
+        //---Create a function component--//
+        const Hello = (props) => <div>Hello {props.firstName} {props.lastName}</div>;
+
+        //---Validation with custom prop types---//
+        const Proptypes = {
+            string(props,propName, componentName)
+            {
+                if(typeof props[propName] !== 'string')
+                {
+                    return new Error(`You should pass a string for ${propName} for ${componentName}, but you have passed ${typeof props[propName]}`);
+                }
+            }
+        }
+
+        //---Function component should have propTypes as property
+        Hello.propTypes = {
+            firstName: Proptypes.string,
+            lastName: Proptypes.string
+        };
+
+        const element = (
+            <Hello firstName={true} />
+        );
+
+        console.log(element);
+
+        ReactDOM.render(element, rootElement);
+
+    </script>
+</body>
+
+</html>
