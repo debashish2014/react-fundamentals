@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>React Fundaments !!</title>
+</head>
+
+<body>
+    <div id="root" />
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel"> //Note the type which is being used here. It is text/babel instead of normal text/javascript. It is required for Babel transpiler to kick in
+        const rootElement = document.getElementById('root');
+
+        //----To use JSX format we will be using Babel (In Browser) transpiler----//
+        //Babel will transpile into equivalent React.createElement function calls
+
+        const content = 'Hello World';
+        const myClassName = 'element-css';
+
+        //Anything between the starting div and closing div, is considered as children in JSX
+        //We can write any javascript inside {}
+        const element1 = <div className={myClassName}>{(() => content)()}</div>;
+
+        //----Using object spread, which can be overridden by appending similar property next to it------//
+        const props = 
+        {
+            className: 'element-css',
+            children: 'Hello Again'
+        };
+        const element2 = <div {...props} className='my-container'/>;
+
+        //Composing elements in a parent container
+        const containerElement = (
+            <div className='container'>
+                {element1}
+                {element2}
+            </div>
+        )
+
+        console.log(containerElement);
+        
+        //Rendering container to the root element
+        ReactDOM.render(containerElement, rootElement);
+
+    </script>
+</body>
+
+</html>

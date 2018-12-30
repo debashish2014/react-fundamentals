@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>React Fundaments !!</title>
+</head>
+
+<body>
+    <div id="root" />
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        //----Basic element creating using pure javascript-----//
+        // const element = document.createElement('div');
+        // element.textContent = 'Hello World';
+        // element.className = 'container';
+        // rootElement.appendChild(element);
+
+        //----Creating a element using React.createElement-----//
+        //const element = React.createElement('div', { className: 'container', children: ['Hello World'] });
+
+        //----Using JSX format and using Bable in browser transpiler----//
+        // const content = 'Hello World';
+        // const myClassName = 'container';
+        // const element = <div className={myClassName}>{(() => content)()}</div>;
+
+        //----Using object spread, which can be overridden by appending similar property next to it------//
+        // const props = 
+        // {
+        //     className: 'container',
+        //     children: 'Hello World'
+        // };
+        // const element = <div {...props} className='my-container'/>;
+
+        //----Function calls to render message component---//
+        // const message = (props) => <div>{props.msg}</div>;
+        // const element = (
+        //     <div className='container'>
+        //         {message({msg:'Hello World'})}
+        //         {message({msg:'Hello Again'})}
+        //     </div>
+        // )
+
+        //----Transforming function call to React.createElemnt call, which can take function as a argument---//
+        // const message = (props) => <div>{props.msg}</div>;
+        // const element = (
+        //     <div className='container'>
+        //         {React.createElement(message,{msg:'Hello World'})}
+        //         {message({msg:'Hello Again'})}
+        //     </div>
+        // )
+
+        //---To make it further better, we will use JSX instead of function call---//
+        // const Message = (props) => <div>{props.msg}</div>;
+        // const element = (
+        //     <div className='container'>
+        //         <Message msg='Hello World'/>
+        //         <Message msg='Hello Again'/>
+        //     </div>
+        // );
+
+        //---We will make it more simpler---//
+        // const Message = (props) => <div>{props.children}</div>;
+        // const element = (
+        //     <div className='container'>
+        //         <Message>Hello World</Message>
+        //         <Message>Hello Again</Message>
+        //     </div>
+        // );
+
+        //---Validation with custom prop types---//
+        const Hello = (props) => <div>Hello {props.firstName} {props.lastName}</div>;
+
+        const Proptypes = {
+            string(props,propName, componentName)
+            {
+                if(typeof props[propName] !== 'string')
+                {
+                    return new Error(`You should pass a string for ${propName} for ${componentName}, but you have passed ${typeof props[propName]}`);
+                }
+            }
+        }
+
+        Hello.propTypes = {
+            firstName: Proptypes.string,
+            lastName: Proptypes.string
+        };
+
+        const element = (
+            <Hello firstName={true} />
+        );
+
+        console.log(element);
+        ReactDOM.render(element, rootElement);
+
+    </script>
+</body>
+
+</html>
