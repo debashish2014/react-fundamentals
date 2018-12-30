@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title>React Fundaments !!</title>
+</head>
+
+<body>
+    <div id="root" />
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        //--------- IMPORTANT CONCEPT--------------//
+        //---React.createElement can take first parameter as function and second parameter as props, which will be passed as an argument to the function
+
+        //Let's create a very simple component function
+        const Message = (props) => <div>{props.msg}</div>;
+
+        //----Normal function calls to render Message component---//
+        const element1 = (
+            <div className='element1-css'>
+                {Message({msg:'Hello World'})}
+                {Message({msg:'Hello Again'})}
+            </div>
+        )
+
+        //----Transforming direct function calls to React.createElemnt call, which can take function as a argument and props which will be passed to the function---//
+        const element2 = (
+            <div className='element2-css'>
+                {React.createElement(Message,{msg:'Hello React'})}
+                {React.createElement(Message,{msg:'I love React'})}
+            </div>
+        )
+
+        //---To make it further better, we will use JSX instead of function call---//
+        //Notice, how we can use the function name as the tag name, //
+        //provided the function name starts with a Capital letter (Very Important Concept)
+        const element3 = (
+            <div className='element3-css'>
+                <Message msg='Hello World'/>
+                <Message msg='Hello Again'/>
+            </div>
+        );
+
+        //---We will make it even more interesting, let's pass the text message between the tags---//
+        const Message2 = (props) => <div>{props.children}</div>;
+        const element4 = (
+            <div className='element4-css'>
+                <Message2>Hello World</Message2>
+                <Message2>Hello Again</Message2>
+            </div>
+        );
+
+        //Composing elements in a parent container
+        const containerElement = (
+            <div className='container'>
+                {element1}
+                {element2}
+                {element3}
+                {element4}
+            </div>
+        )
+        
+        console.log(containerElement);
+        ReactDOM.render(containerElement, rootElement);
+
+    </script>
+</body>
+
+</html>
