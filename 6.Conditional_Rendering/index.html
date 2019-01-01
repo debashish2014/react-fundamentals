@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>React Fundaments !!</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+    <script type="text/babel">
+        const rootElement = document.getElementById('root');
+
+        function Message({message}) {
+            if(!message)
+                return <div>Message is empty</div>
+            return<div>{message}</div>
+        }
+
+        //The above funtion will be translated to below function by Babel. See how {message} is being translated to _ref.message
+
+        // function Message(_ref) {
+        //     var message = _ref.message;
+
+        //     if (!message) return React.createElement(
+        //         'div',
+        //         null,
+        //         'Message is empty'
+        //     );
+        //     return React.createElement(
+        //         'div',
+        //         null,
+        //         message
+        //     );
+        // }
+
+        const element = (
+            <div>
+                    <Message message={null} />
+                    <Message message="Hello World" />
+            </div>
+        )    
+        ReactDOM.render(
+            element,
+            document.getElementById('root'),
+        )
+
+        // <Message message={null} /> will translate to below by Babel
+        // React.createElement(Message, { message: null });
+
+        // <Message message="Hello World" /> will translate to below by Babel
+        // React.createElement(Message, { message: "Hello World" });
+
+
+    </script>
+</body>
+
+</html>
